@@ -1,22 +1,42 @@
 package ObjectsAndClasses;
 
-public class Trade {
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public abstract class Trade {
     private String id ;
     private String symbol;
     private int quantity;
     private double price;
 
-    public Trade(String id, String symbol, int quantity){
+    private LocalDate dateOfTrade;
+
+    private LocalTime timeOfTrade;
+
+    private double tradeValue;
+
+
+    private double dividend;
+
+    public abstract double calcDividend();
+
+    public Trade(double dividend, String id, String symbol, int quantity ){
         this.id = id;
         this.symbol = symbol;
         this.quantity = quantity;
+        this.dividend = dividend;
+        this.timeOfTrade = LocalTime.now();
+        this.dateOfTrade = LocalDate.now();
     }
 
-    public Trade(String id, String symbol, int quantity, double price){
+    public Trade(double dividend, String id, String symbol, int quantity, double price){
         this.id = id;
         this.symbol = symbol;
         this.quantity = quantity;
         this.price = price;
+        this.dividend = dividend;
+        this.timeOfTrade = LocalTime.now();
+        this.dateOfTrade = LocalDate.now();
     }
 
     public void setPrice(double myPrice) {
@@ -38,10 +58,27 @@ public class Trade {
         return ("ID: " + id + ", Symbol: " + symbol + ", Quantity: " + quantity + ", Price: " + price);
     }
 
-    public static void main (String[] args){
-        Trade t1 = new Trade("T1", "APPL", 100, 15.25);
-        System.out.println(t1.toString());
+
+    public double getDiviend (){
+        return dividend;
     }
 
+    public void setDividend (double dividend){
+        this.dividend = dividend;
+    }
+
+
+
+    public double getTradeValue (){
+        return this.tradeValue;
+    }
+
+    public LocalTime getTimeOfTrade (){
+        return this.getTimeOfTrade();
+    }
+
+    public LocalDate getDateOfTrade (){
+        return this.getDateOfTrade();
+    }
 
 }
